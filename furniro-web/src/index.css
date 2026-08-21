@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import "tailwindcss";
+
+@theme {
+    --font-montserrat: "Montserrat", sans-serif;
+    --font-poppins: "Poppins", sans-serif;
+    --container-content: 1440px;
+    --animate-gallery: gallery-scroll 40s linear infinite;
+    @keyframes gallery-scroll {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(-50%);
+        }
+    }
+}
+@layer components {
+    .custom-toast {
+        @apply bg-white text-[#3a3a3a] font-medium rounded-none font-poppins;
+    }
+
+    .custom-toast-body {
+        @apply p-2;
+    }
+
+    #carrousel .splide__pagination__page.is-active {
+        transform: scale(1) !important;
+    }
+
+    #carrousel .splide__pagination {
+        gap: 12px !important;
+    }
+
+    @media (max-width: 1023px) {
+        #carrousel .splide__pagination {
+            top: 550px !important;
+        }
+    }
+
+    #carrousel .splide__slide {
+        @apply !flex !items-center !justify-center;
+        width: 404px !important;
+        min-width: 404px !important;
+        max-width: 404px !important;
+        flex: 0 0 404px !important;
+        margin-right: 0 !important;
+    }
+
+    #carrousel .splide__list {
+        @apply !items-start;
+        height: 550px !important;
+    }
+
+    #carrousel .splide__slide img {
+        @apply !object-cover !block;
+        transition:
+            width 0.5s ease-in-out,
+            height 0.5s ease-in-out !important;
+    }
+
+    #carrousel .splide__slide:not(.is-active) img {
+        width: 372px !important;
+        height: 440px !important;
+    }
+
+    #carrousel .splide__slide.is-active img {
+        width: 404px !important;
+        height: 520px !important;
+    }
+
+    #carrousel .splide__arrow--prev {
+        display: none !important;
+    }
+
+    #carrousel .splide__arrow--next {
+        @apply !bg-white !w-12 !h-12 !shadow-md !rounded-full !opacity-100;
+    }
+
+    @media (hover: hover) {
+        #carrousel .splide__arrow--next:hover {
+            background-color: #b88e2f !important;
+        }
+    }
+
+    #carrousel .splide__arrow--next svg {
+        display: none !important;
+    }
+
+    #carrousel .splide__arrow--next::after {
+        content: "";
+        display: block;
+        width: 9px;
+        height: 16px;
+        background-color: #b88e2f;
+        mask-image: url("data:image/svg+xml,%3Csvg width='9' height='16' viewBox='0 0 9 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.899994 0.899902L7.89999 7.8999L0.899994 14.8999' stroke='%23B88E2F' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: contain;
+    }
+
+    @media (hover: hover) {
+        #carrousel .splide__arrow--next:hover::after {
+            background-color: white;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        #carrousel .splide__pagination {
+            top: 440px !important;
+            left: auto !important;
+            transform: none !important;
+            right: calc(100% - 548px) !important;
+        }
+    }
+}
+
+.Toastify__progress-bar {
+    background: #2ec1ac !important;
+}
+
+.Toastify__close-button {
+    color: #b88e2f !important;
+}
+
+.Toastify__toast-icon svg {
+    fill: #2ec1ac !important;
+}

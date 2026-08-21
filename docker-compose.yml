@@ -1,0 +1,25 @@
+services:
+  backend:
+    build:
+      context: ./furniro-back-end
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./furniro-back-end:/app
+      - /app/node_modules
+    environment:
+      - PORT=3000
+    command: sh -c "npm run seed && npm run start:dev"
+
+  frontend:
+    build:
+      context: ./furniro-web
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./furniro-web:/app
+      - /app/node_modules
+    depends_on:
+      - backend
