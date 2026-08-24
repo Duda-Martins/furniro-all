@@ -22,7 +22,7 @@ export class AuthService {
       user = await this.usersService.findByEmail(dto.email);
     } catch (error) {
       if (error instanceof NotFoundException) {
-        throw new UnauthorizedException('Credenciais inválidas');
+        throw new UnauthorizedException('Invalid credentials');
       }
 
       throw error;
@@ -31,7 +31,7 @@ export class AuthService {
     const isPasswordValid = await compare(dto.password, user.password);
 
     if (!isPasswordValid) {
-      throw new UnauthorizedException('Credenciais inválidas');
+      throw new UnauthorizedException('Invalid credentials');
     }
 
     const payload = {

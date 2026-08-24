@@ -49,7 +49,7 @@ export const useProduct = (id?: number | string): UseProductReturn => {
             const message =
                 err instanceof Error
                     ? err.message
-                    : "Produto não encontrado.";
+                    : "Product not found.";
 
             setError(message);
         } finally {
@@ -83,7 +83,7 @@ export const useProduct = (id?: number | string): UseProductReturn => {
                     setError(
                         err instanceof Error
                             ? err.message
-                            : "Produto não encontrado.",
+                            : "Product not found.",
                     );
                 }
             })
