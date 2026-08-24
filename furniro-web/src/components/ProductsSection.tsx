@@ -65,18 +65,18 @@ export function ProductsSection() {
                             </svg>
                         </div>
                         <h3 className="font-poppins text-2xl font-bold text-[#3A3A3A] mb-2">
-                            Não foi possível carregar os produtos
+                            Could not load the products
                         </h3>
                         <p className="font-poppins text-[#898989] text-base mb-6">
                             {error ||
-                                "Ocorreu um erro ao buscar o catálogo de produtos."}
+                                "An error occurred while fetching the product catalog."}
                         </p>
                         <button
                             type="button"
                             onClick={() => refetch()}
                             className="cursor-pointer font-poppins bg-[#B88E2F] hover:bg-[#A97C1A] text-white font-semibold text-base px-8 py-3 transition-colors"
                         >
-                            Tentar novamente
+                            Try again
                         </button>
                     </div>
                 )}

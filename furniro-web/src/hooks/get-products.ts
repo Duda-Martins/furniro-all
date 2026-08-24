@@ -47,7 +47,7 @@ export const useProducts = (params?: ProductFilter) => {
                 setError(
                     err instanceof Error
                         ? err.message
-                        : "Erro ao carregar produtos.",
+                        : "Error loading products.",
                 );
             } finally {
                 setLoading(false);
@@ -83,7 +83,7 @@ export const useProducts = (params?: ProductFilter) => {
                     setError(
                         err instanceof Error
                             ? err.message
-                            : "Erro ao carregar produtos.",
+                            : "Error loading products.",
                     );
                 }
             })

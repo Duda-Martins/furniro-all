@@ -11,11 +11,12 @@ export function UserAndCartIcon({ className }: UserAndCartIconProps) {
     return (
         <div
             className={
-                className + " flex flex-row items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5"
+                className +
+                " flex flex-row items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5"
             }
         >
-            <a
-                href="#"
+            <Link
+                to="/login"
                 className="flex h-6 w-6 items-center justify-center sm:h-7 sm:w-7 p-0.1"
             >
                 <svg
@@ -29,7 +30,7 @@ export function UserAndCartIcon({ className }: UserAndCartIconProps) {
                         fill="black"
                     />
                 </svg>
-            </a>
+            </Link>
             <Link
                 to="/cart"
                 aria-label={

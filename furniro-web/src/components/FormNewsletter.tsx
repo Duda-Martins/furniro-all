@@ -7,9 +7,9 @@ export function FormNewsletter() {
 
     const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    const erro =
+    const error =
         touched && email && !validEmail
-            ? "Invalid e-mail."
+            ? "Invalid email."
             : "";
 
     function handleSubmitNewsletter(
@@ -48,7 +48,7 @@ export function FormNewsletter() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     onBlur={() => setTouched(true)}
-                    aria-invalid={!!erro}
+                    aria-invalid={!!error}
                     aria-describedby="email-error"
                     className="font-poppins text-sm text-[#9F9F9F] min-w-0 flex-1 pb-1 border-b border-b-black text-start"
                 />
@@ -63,7 +63,7 @@ export function FormNewsletter() {
             </div>
 
             <p id="email-error" className="text-xs text-red-500 min-h-5 mt-1">
-                {erro}
+                {error}
             </p>
         </form>
     );

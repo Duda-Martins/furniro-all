@@ -10,6 +10,7 @@ import { Shop } from "./pages/Shop";
 import { Product } from "./pages/Product";
 import { Cart } from "./pages/Cart";
 import { NotFound } from "./pages/NotFound";
+import { Login } from "./pages/Login";
 
 function App() {
     return (
@@ -39,6 +40,7 @@ function App() {
                     <Route path="shop/:category" element={<Shop />} />
                     <Route path="product/:slug" element={<Product />} />
                     <Route path="cart" element={<Cart />} />
+                    <Route path="login" element={<Login />} />
                     <Route path="*" element={<NotFound />} />
                 </Route>
             </Routes>
