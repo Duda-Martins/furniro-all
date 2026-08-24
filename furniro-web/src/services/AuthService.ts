@@ -23,4 +23,17 @@ export class AuthService {
 
         return data;
     }
+
+    static async register(payload: {
+        name: string;
+        email: string;
+        password: string;
+        confirmPassword: string;
+    }) {
+        const response = await api("/users", {
+            method: "POST",
+            body: JSON.stringify(payload),
+        });
+        return response.json();
+    }
 }

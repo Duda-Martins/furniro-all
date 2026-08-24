@@ -5,12 +5,21 @@ import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { StringValue } from 'ms';
 import { UserModule } from '../user/user.module';
+import { loadEnvFile } from 'node:process';
+
+loadEnvFile();
+
+const jwtSecret = process.env.JWT_SECRET;
+
+if (!jwtSecret) {
+  throw new Error('JWT_SECRET is not configured');
+}
 
 @Module({
   imports: [
     UserModule,
     JwtModule.register({
-      secret: process.env.JWT_SECRET,
+      secret: jwtSecret,
       signOptions: {
         expiresIn: (process.env.JWT_EXPIRES_IN as StringValue) || '3d',
       },
