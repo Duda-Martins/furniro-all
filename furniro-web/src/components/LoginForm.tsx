@@ -25,6 +25,7 @@ export default function LoginForm() {
             email: data.email,
             password: data.password,
         };
+
         try {
             await AuthService.login(loginPayload);
             const from = location.state?.from;
