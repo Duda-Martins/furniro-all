@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "auth-service-test",
+			"type": "shell",
+			"command": "npm test -- --runTestsByPath src/auth/auth.service.spec.ts --runInBand",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		}
+	]
+}

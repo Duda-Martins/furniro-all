@@ -1,5 +1,47 @@
 # 🗺️ Roadmap de Implementação — Furniro
 
+- [🗺️ Roadmap de Implementação — Furniro](#️-roadmap-de-implementação--furniro)
+    - [📦 Estado Atual do Projeto](#-estado-atual-do-projeto)
+        - [Roteamento — `src/App.tsx`](#roteamento--srcapptsx)
+        - [Carrinho — `src/store/cartStore.ts`](#carrinho--srcstorecartstorets)
+        - [Página Cart — `src/pages/Cart.tsx`](#página-cart--srcpagescarttsx)
+        - [Componentes reutilizáveis relevantes](#componentes-reutilizáveis-relevantes)
+        - [Header e Nav](#header-e-nav)
+        - [Cliente HTTP — `src/api/api.ts`](#cliente-http--srcapiapits)
+        - [Backend — O que existe](#backend--o-que-existe)
+        - [Estilização](#estilização)
+    - [Sequência de Implementação](#sequência-de-implementação)
+    - [Fase 1 — Backend: Autenticação](#fase-1--backend-autenticação)
+        - [1.1 Módulo `user`](#11-módulo-user)
+        - [1.2 Módulo `auth`](#12-módulo-auth)
+    - [Fase 2 — Frontend: Infraestrutura de Auth](#fase-2--frontend-infraestrutura-de-auth)
+        - [2.1 `src/store/authStore.ts` (Zustand)](#21-srcstoreauthstorets-zustand)
+        - [2.2 Atualizar `src/api/api.ts`](#22-atualizar-srcapiapits)
+        - [2.3 Componente `ProtectedRoute`](#23-componente-protectedroute)
+        - [2.4 Instalar dependências de formulário](#24-instalar-dependências-de-formulário)
+    - [Fase 3 — Login / Cadastro](#fase-3--login--cadastro)
+        - [3.1 Página `src/pages/Login.tsx`](#31-página-srcpageslogintsx)
+        - [3.2 Página `src/pages/Register.tsx`](#32-página-srcpagesregistertsx)
+        - [3.3 Logout e ícone de usuário](#33-logout-e-ícone-de-usuário)
+        - [3.4 Atualizar `src/App.tsx`](#34-atualizar-srcapptsx)
+    - [Fase 4 — Cart Sidebar](#fase-4--cart-sidebar)
+        - [4.1 Componente `src/components/CartSidebar.tsx`](#41-componente-srccomponentscartsidebartsx)
+        - [4.2 Estado de abertura do Sidebar](#42-estado-de-abertura-do-sidebar)
+        - [4.3 Atualizar `src/components/UserAndCartIcon.tsx`](#43-atualizar-srccomponentsuserandcarticontsx)
+        - [4.4 Atualizar `src/components/Layout.tsx`](#44-atualizar-srccomponentslayouttsx)
+    - [Fase 5 — Checkout](#fase-5--checkout)
+        - [5.1 Página `src/pages/Checkout.tsx`](#51-página-srcpagescheckouttsx)
+        - [5.2 Atualizar `src/pages/Cart.tsx`](#52-atualizar-srcpagescarttsx)
+    - [Fase 6 — Contact](#fase-6--contact)
+        - [6.1 Página `src/pages/Contact.tsx`](#61-página-srcpagescontacttsx)
+        - [6.2 Rota já preparada na Fase 3](#62-rota-já-preparada-na-fase-3)
+    - [Fase 7 — Ajustes Finais](#fase-7--ajustes-finais)
+        - [7.1 Branches por funcionalidade](#71-branches-por-funcionalidade)
+        - [7.2 Limpeza e consistência](#72-limpeza-e-consistência)
+    - [Novas instalações necessárias](#novas-instalações-necessárias)
+        - [Frontend (`furniro-web/`)](#frontend-furniro-web)
+        - [Backend (`furniro-back-end/`)](#backend-furniro-back-end)
+
 ---
 
 ## 📦 Estado Atual do Projeto
@@ -8,14 +50,14 @@
 
 Rotas existentes:
 
-| Rota | Página | Proteção |
-|---|---|---|
-| `/` | `Home` | pública |
-| `/shop` | `Shop` | pública |
-| `/shop/:category` | `Shop` | pública |
-| `/product/:slug` | `Product` | pública |
-| `/cart` | `Cart` | pública |
-| `*` | `NotFound` | — |
+| Rota              | Página     | Proteção |
+| ----------------- | ---------- | -------- |
+| `/`               | `Home`     | pública  |
+| `/shop`           | `Shop`     | pública  |
+| `/shop/:category` | `Shop`     | pública  |
+| `/product/:slug`  | `Product`  | pública  |
+| `/cart`           | `Cart`     | pública  |
+| `*`               | `NotFound` | —        |
 
 - `/contact` e `/about` já existem no `Nav` mas não têm página — caem no `NotFound`.
 - Não há nenhum sistema de autenticação ainda.
@@ -28,14 +70,14 @@ Store Zustand com persistência em `localStorage` (chave `"furniro-cart"`).
 
 Funções exportadas prontas para reutilizar:
 
-| Função | O que faz |
-|---|---|
-| `useCartStore` | Hook principal do store |
-| `getCartTotal(items)` | Soma total do carrinho |
-| `getCartCount(items)` | Quantidade total de itens |
-| `getSubtotal(item)` | Subtotal de um item (preço × quantidade, com desconto) |
-| `getUnitPrice(item)` | Preço unitário com desconto aplicado |
-| `getFullPrice(item)` | Preço sem desconto |
+| Função                | O que faz                                              |
+| --------------------- | ------------------------------------------------------ |
+| `useCartStore`        | Hook principal do store                                |
+| `getCartTotal(items)` | Soma total do carrinho                                 |
+| `getCartCount(items)` | Quantidade total de itens                              |
+| `getSubtotal(item)`   | Subtotal de um item (preço × quantidade, com desconto) |
+| `getUnitPrice(item)`  | Preço unitário com desconto aplicado                   |
+| `getFullPrice(item)`  | Preço sem desconto                                     |
 
 Tipos exportados: `CartItem`, `CartVariant`.
 
@@ -53,16 +95,16 @@ Ações disponíveis no store: `addItem`, `removeItem`, `updateQuantity`, `clear
 
 ### Componentes reutilizáveis relevantes
 
-| Componente | Localização | O que faz |
-|---|---|---|
-| `Container` | `components/Container.tsx` | Wrapper com `max-w-content` e padding padrão |
-| `BannerContainer` | `components/BannerContainer.tsx` | Banner de topo com título e breadcrumb |
-| `CartButton` | `components/CartButton.tsx` | Botão outline com toast opcional |
-| `CartTotals` | `components/CartTotals.tsx` | Aside com subtotal, total e botão de checkout — recebe `onCheckout: () => void` |
-| `Increaser` | `components/Increaser.tsx` | Controle de quantidade +/− com min/max |
-| `FeaturesSection` | `components/FeaturesSection.tsx` | Seção de features usada no Cart e Product |
-| `Layout` | `components/Layout.tsx` | Header + `<Outlet />` + Footer |
-| `BannerContainer` | `components/BannerContainer.tsx` | Aceita `title`, `crumbs[]`, `image` opcional |
+| Componente        | Localização                      | O que faz                                                                       |
+| ----------------- | -------------------------------- | ------------------------------------------------------------------------------- |
+| `Container`       | `components/Container.tsx`       | Wrapper com `max-w-content` e padding padrão                                    |
+| `BannerContainer` | `components/BannerContainer.tsx` | Banner de topo com título e breadcrumb                                          |
+| `CartButton`      | `components/CartButton.tsx`      | Botão outline com toast opcional                                                |
+| `CartTotals`      | `components/CartTotals.tsx`      | Aside com subtotal, total e botão de checkout — recebe `onCheckout: () => void` |
+| `Increaser`       | `components/Increaser.tsx`       | Controle de quantidade +/− com min/max                                          |
+| `FeaturesSection` | `components/FeaturesSection.tsx` | Seção de features usada no Cart e Product                                       |
+| `Layout`          | `components/Layout.tsx`          | Header + `<Outlet />` + Footer                                                  |
+| `BannerContainer` | `components/BannerContainer.tsx` | Aceita `title`, `crumbs[]`, `image` opcional                                    |
 
 ---
 
@@ -71,9 +113,9 @@ Ações disponíveis no store: `addItem`, `removeItem`, `updateQuantity`, `clear
 - `Header` → `Nav` + `UserAndCartIcon`, sticky no topo (`z-50`).
 - `Nav` — links existentes: Home `/`, Shop `/shop`, About `/about`, Contact `/contact`. O menu mobile já está implementado.
 - `UserAndCartIcon`:
-  - Ícone de usuário: atualmente é `<a href="#">` — **não linka para nada**.
-  - Ícone de carrinho: atualmente navega para `/cart` via `<Link>` — **será alterado para abrir o sidebar**.
-  - Exibe badge com contagem de itens usando `getCartCount`.
+    - Ícone de usuário: atualmente é `<a href="#">` — **não linka para nada**.
+    - Ícone de carrinho: atualmente navega para `/cart` via `<Link>` — **será alterado para abrir o sidebar**.
+    - Exibe badge com contagem de itens usando `getCartCount`.
 
 ---
 
@@ -123,12 +165,14 @@ Fase 1 (Backend Auth)
 > Tudo que depende de login precisa do backend pronto primeiro. O backend atual só tem `product` e `category` — nenhum módulo de usuário ou auth existe ainda.
 
 ### 1.1 Módulo `user`
+
 - Criar entidade `User` com campos: `id`, `name`, `email`, `password` (hash)
 - Seguir o mesmo padrão dos módulos existentes: `UserEntity`, `UserRepository`, `UserService`, `UserModule`
 - Endpoint `POST /users` — cadastro de novo usuário
 - Hash da senha com `bcrypt` antes de persistir
 
 ### 1.2 Módulo `auth`
+
 - Instalar dependências (ver seção de instalações no final)
 - Endpoint `POST /auth/login` — valida credenciais e retorna JWT
 - `JwtStrategy` para validar o token nas rotas protegidas
@@ -142,23 +186,27 @@ Fase 1 (Backend Auth)
 > Antes de criar qualquer página protegida, o cliente precisa saber gerenciar o token. O `cartStore.ts` é o modelo a seguir para criar o `authStore`.
 
 ### 2.1 `src/store/authStore.ts` (Zustand)
+
 - Seguir o mesmo padrão do `cartStore`: `create` + `persist` + `createJSONStorage(() => localStorage)`
 - Estado: `user` (nome e email), `token`, `isAuthenticated`
 - Ações: `login(token, user)`, `logout()`
 - Chave no localStorage: `"furniro-auth"`
 
 ### 2.2 Atualizar `src/api/api.ts`
+
 - O cliente HTTP atual não envia autenticação — adicionar leitura do token do `authStore`
 - Incluir header `Authorization: Bearer <token>` quando o token existir
 - Tratar resposta `401` chamando `authStore.logout()` automaticamente
 
 ### 2.3 Componente `ProtectedRoute`
+
 - Criar em `src/components/ProtectedRoute.tsx`
 - Lê `isAuthenticated` do `authStore`
 - Se não autenticado: `<Navigate to="/login" state={{ from: location }} replace />`
 - O `state.from` permite redirecionar de volta após o login
 
 ### 2.4 Instalar dependências de formulário
+
 ```bash
 # dentro de furniro-web/
 npm install react-hook-form zod @hookform/resolvers
@@ -171,6 +219,7 @@ npm install react-hook-form zod @hookform/resolvers
 > Necessário antes de qualquer rota protegida funcionar no frontend. O `ProtectedRoute` da Fase 2 já redireciona para `/login` — essa fase cria a página de destino.
 
 ### 3.1 Página `src/pages/Login.tsx`
+
 - Rota pública: `/login`
 - Reutiliza `BannerContainer` (título "Login"), `Container`, `FeaturesSection`
 - Formulário com `react-hook-form` + `zod`: campos `email` e `password`
@@ -179,19 +228,23 @@ npm install react-hook-form zod @hookform/resolvers
 - Link para `/register`
 
 ### 3.2 Página `src/pages/Register.tsx`
+
 - Rota pública: `/register`
 - Reutiliza `BannerContainer`, `Container`, `FeaturesSection`
 - Formulário com `react-hook-form` + `zod`: campos `name`, `email`, `password`, `confirmPassword`
 - Após cadastro com sucesso: redireciona para `/login`
 
 ### 3.3 Logout e ícone de usuário
+
 - O ícone de usuário em `UserAndCartIcon.tsx` atualmente é `<a href="#">` — alterar para:
-  - `<Link to="/login">` se `!isAuthenticated`
-  - Botão que chama `authStore.logout()` + `navigate("/")` se `isAuthenticated`
+    - `<Link to="/login">` se `!isAuthenticated`
+    - Botão que chama `authStore.logout()` + `navigate("/")` se `isAuthenticated`
 
 ### 3.4 Atualizar `src/App.tsx`
+
 - Adicionar rotas `/login` e `/register` dentro do `<Route path="/" element={<Layout />}>`
 - Envolver `/checkout` e `/contact` com `<ProtectedRoute>`:
+
 ```tsx
 <Route path="checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
 <Route path="contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
@@ -204,24 +257,28 @@ npm install react-hook-form zod @hookform/resolvers
 > Depende apenas do `cartStore` que já existe — pode ser desenvolvido em paralelo com a Fase 3. Todas as funções de cálculo (`getSubtotal`, `getUnitPrice`, `getCartTotal`) e o tipo `CartItem` já estão prontos para uso.
 
 ### 4.1 Componente `src/components/CartSidebar.tsx`
+
 - Overlay escuro + painel lateral direito (conforme Figma)
 - Lista os itens do carrinho: imagem (`/img/products/${item.product.image}`), nome, variante, preço unitário, botão de remover
 - Scroll interno quando há muitos produtos (altura limitada conforme Figma)
 - Total do carrinho usando `getCartTotal`
 - Botões no rodapé:
-  - "Cart" → `<Link to="/cart">` + fecha o sidebar
-  - "Checkout" → `navigate("/checkout")` (o `ProtectedRoute` cuida do redirect para login se necessário)
+    - "Cart" → `<Link to="/cart">` + fecha o sidebar
+    - "Checkout" → `navigate("/checkout")` (o `ProtectedRoute` cuida do redirect para login se necessário)
 - Reutiliza: `useCartStore`, `getSubtotal`, `getUnitPrice`, `getCartTotal`, `formatPrice`
 - Recebe props: `isOpen: boolean`, `onClose: () => void`
 
 ### 4.2 Estado de abertura do Sidebar
+
 - Adicionar ao `cartStore` existente (ou criar store separado) a flag `isSidebarOpen` com ações `openSidebar()` e `closeSidebar()`
 
 ### 4.3 Atualizar `src/components/UserAndCartIcon.tsx`
+
 - O ícone de carrinho (`<Link to="/cart">`) deve ser alterado para um `<button>` que chama `openSidebar()`
 - O badge de contagem já existe e continua funcionando
 
 ### 4.4 Atualizar `src/components/Layout.tsx`
+
 - O `Layout` atual é simples: `Header + Outlet + Footer`
 - Adicionar `<CartSidebar isOpen={isSidebarOpen} onClose={closeSidebar} />` antes do `Footer`
 - O `Header` precisa receber (ou o `UserAndCartIcon` lê diretamente do store) o handler de abertura
@@ -233,20 +290,22 @@ npm install react-hook-form zod @hookform/resolvers
 > Depende da Fase 2 (ProtectedRoute) e da Fase 3 (Login). O `CartTotals` e o `Cart.tsx` já existem e precisam de pequenas alterações.
 
 ### 5.1 Página `src/pages/Checkout.tsx`
+
 - Rota protegida: `/checkout`
 - Reutiliza `BannerContainer` (título "Checkout"), `Container`, `FeaturesSection`, `formatPrice`, `useCartStore`
 - Layout conforme Figma: formulário de billing à esquerda, resumo do pedido à direita
 - Formulário com `react-hook-form` + `zod`:
-  - Campos obrigatórios: First Name, Last Name, ZIP Code, Country/Region, Street Address, Town/City, Province, Email, Phone
-  - Campos opcionais: Company Name, Add-on Address
-  - Seleção de método de pagamento — obrigatório antes de "Place Order"
+    - Campos obrigatórios: First Name, Last Name, ZIP Code, Country/Region, Street Address, Town/City, Province, Email, Phone
+    - Campos opcionais: Company Name, Add-on Address
+    - Seleção de método de pagamento — obrigatório antes de "Place Order"
 - **Campo ZIP Code integrado com ViaCEP** (`https://viacep.com.br/ws/{cep}/json/`):
-  - Ao preencher 8 dígitos, busca automaticamente e preenche: Country/Region (`"Brasil"`), Street Address (`logradouro`), Town/City (`localidade`), Province (`uf`)
-  - Usar `setValue` do `react-hook-form` para preencher os campos
+    - Ao preencher 8 dígitos, busca automaticamente e preenche: Country/Region (`"Brasil"`), Street Address (`logradouro`), Town/City (`localidade`), Province (`uf`)
+    - Usar `setValue` do `react-hook-form` para preencher os campos
 - Ao clicar em "Place Order": `toast.success(...)` e `cartStore.clear()`
 - **Sem `alert()` ou atributo `required` HTML**
 
 ### 5.2 Atualizar `src/pages/Cart.tsx`
+
 - O `handleCheckout` atual dispara um `toast.success` — substituir por `navigate("/checkout")`
 - O `CartTotals` já recebe `onCheckout: () => void`, basta trocar a implementação
 
@@ -257,16 +316,18 @@ npm install react-hook-form zod @hookform/resolvers
 > Depende da Fase 2 (ProtectedRoute) e da Fase 3 (Login). O link `/contact` já existe no `Nav.tsx` — só falta a página e a rota.
 
 ### 6.1 Página `src/pages/Contact.tsx`
+
 - Rota protegida: `/contact`
 - Reutiliza `BannerContainer` (título "Contact"), `Container`, `FeaturesSection`
 - Formulário com `react-hook-form` + `zod`:
-  - "Your name" — obrigatório
-  - "Email address" — obrigatório, formato de email válido
-  - Demais campos — opcionais, sem validação obrigatória
+    - "Your name" — obrigatório
+    - "Email address" — obrigatório, formato de email válido
+    - Demais campos — opcionais, sem validação obrigatória
 - Ao clicar em "Submit": `toast.success(...)`
 - **Sem `alert()` ou atributo `required` HTML**
 
 ### 6.2 Rota já preparada na Fase 3
+
 - O `Nav.tsx` já tem `<Link to="/contact">` — nenhuma alteração necessária aqui.
 - A rota protegida já terá sido adicionada ao `App.tsx` na Fase 3.
 
@@ -275,7 +336,9 @@ npm install react-hook-form zod @hookform/resolvers
 ## Fase 7 — Ajustes Finais
 
 ### 7.1 Branches por funcionalidade
+
 Criar antes de iniciar cada fase:
+
 - `feature/auth-backend`
 - `feature/auth-frontend`
 - `feature/login-register`
@@ -284,6 +347,7 @@ Criar antes de iniciar cada fase:
 - `feature/contact`
 
 ### 7.2 Limpeza e consistência
+
 - Remover `src/services/api.ts` (exporta só `API_URL` como string) — centralizar tudo em `src/api/api.ts`
 - Garantir responsividade em todas as novas páginas
 - Confirmar que nenhum formulário usa `alert()` ou atributo `required` HTML
@@ -293,11 +357,13 @@ Criar antes de iniciar cada fase:
 ## Novas instalações necessárias
 
 ### Frontend (`furniro-web/`)
+
 ```bash
 npm install react-hook-form zod @hookform/resolvers
 ```
 
 ### Backend (`furniro-back-end/`)
+
 ```bash
 npm install @nestjs/jwt @nestjs/passport passport passport-jwt bcrypt
 npm install -D @types/passport-jwt @types/bcrypt
