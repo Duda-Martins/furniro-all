@@ -2,7 +2,7 @@
 
 > 📖 [Versão em português](README.md) | English version
 
-A furniture e-commerce landing page built with React, TypeScript and Tailwind CSS, consuming a mocked REST API with json-server.
+A furniture e-commerce interface built with React, TypeScript, and Tailwind CSS. The frontend integrates authentication with the NestJS API and keeps `json-server` as a mock mode for the catalog.
 
 <div align="center">
 
@@ -10,7 +10,7 @@ A furniture e-commerce landing page built with React, TypeScript and Tailwind CS
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-8-purple?logo=vite)](https://vite.dev/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-38B2AC?logo=tailwindcss)](https://tailwindcss.com/)
-[![json-server](https://img.shields.io/badge/json--server-0.17-orange)](https://github.com/typicode/json-server)
+[![NestJS](https://img.shields.io/badge/NestJS-11-red?logo=nestjs)](https://nestjs.com/)
 
 </div>
 
@@ -37,7 +37,7 @@ The project was built following:
 - 🖼️ **Hero Section** with a call-to-action for the new collection
 - 📂 **Browse The Range** - category navigation (Dining, Living, Bedroom) with hover effect
 - 🛍️ **Product Catalog** featuring:
-    - Paginated loading via a "Show More" button (`_page` / `_limit` from json-server)
+    - Paginated loading via a "Show More" button in mock mode
     - Dynamic discount badges (`-X%`) and "New" product badges (based on posting date)
     - Hover overlay with **Share**, **Compare**, and **Like** actions
     - Add to cart with toast notification
@@ -45,6 +45,9 @@ The project was built following:
 - ♾️ **Infinite Gallery** (`#FuniroFurniture`) with horizontal scroll animation via pure CSS
 - 📧 **Newsletter Form** with real-time email validation and toast feedback
 - 📱 **Responsive Menu** with a hamburger button for mobile devices
+- 🔐 **Authentication** with login, registration, and protected checkout and contact pages
+- 🛒 **Persistent cart** with Zustand and local storage
+- 💳 **Checkout** with validation and ZIP code lookup
 - 🔗 **Complete Footer** with social media, institutional links, and newsletter
 
 ---
@@ -118,10 +121,9 @@ src/
 │   └── slides.ts
 ├── types/
 │   └── splide.d.ts                # Manual typings for @splidejs/react-splide
-└── assets/
+└── public/
     ├── img/                        # Product, grid, and carousel images
-    ├── favicon.svg
-    └── icons.svg
+    └── icons/                      # Public icons
 
 db/
 └── db.json                        # Mocked database consumed by json-server
@@ -130,11 +132,11 @@ db/
 ### Data Flow
 
 ```
-ProductsSection → ProductService.getProducts() → json-server (db/db.json)
-       → ProductResponseModel { products, hasMore } → ProductCard (rendering)
+ProductsSection → ProductService.getProducts() → API configured in `VITE_API_URL`
+    → ProductResponseModel → ProductCard (rendering)
 ```
 
-`ProductService` builds the query string from a `ProductFilter` (name, category, price range, discount, pagination, and sorting) and uses the `X-Total-Count` header, returned by json-server, to determine whether there are more pages (`hasMore`).
+`ProductService` currently keeps the legacy `json-server` contract, using `_page`, `_limit`, `_sort`, `_order`, and the `X-Total-Count` header. Full adaptation to the NestJS API parameters remains an integration task.
 
 ---
 
@@ -236,7 +238,7 @@ npm run lint          # Runs ESLint
 ## 📈 Possible Future Improvements
 
 - 🔍 Implement product filters by category, price, and discount (`ProductFilterModel` already supports this)
-- 🛒 Persist the shopping cart (currently "Add to Cart" only shows a toast)
+- 🔌 Consolidate `ProductService` with the NestJS API contract
 - 🧪 Add automated tests (unit and integration)
 - 🌐 Migrate from `json-server` to a real API in production
 
@@ -245,16 +247,5 @@ npm run lint          # Runs ESLint
 ## 📝 License
 
 This project is licensed under the MIT License.
-
----
-
-## 👤 Author
-
-**Maria Eduarda Martins Rodrigues**
-
-- 🔗 [GitHub](https://github.com/Duda-Martins)
-- 📧 Contact: mrodrigues.mariaeduarda@gmail.com
-
----
 
 **Made with ❤️**

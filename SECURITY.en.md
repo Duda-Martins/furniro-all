@@ -18,7 +18,7 @@ If you discover a security vulnerability or issue, please follow these guideline
 
 ## 🔐 Implemented Security Best Practices
 
-This project follows recommended security best practices for React frontend applications.
+This project follows security practices for the React frontend and NestJS backend.
 
 ### Validation and Sanitization
 
@@ -28,7 +28,7 @@ This project follows recommended security best practices for React frontend appl
 
 ### API Consumption
 
-- ✅ API requests are centralized in the `services/` layer (`ProductService`), avoiding scattered requests throughout components.
+- ✅ Authentication requests are centralized in `src/api/`; the catalog still uses `ProductService` with the mock contract.
 - ✅ Error responses (`response.ok`) are checked before processing returned data.
 
 ### Dependencies
@@ -38,13 +38,17 @@ This project follows recommended security best practices for React frontend appl
 
 ### Authentication and Authorization
 
-- ⚠️ **Note:** This is an educational/portfolio project and does not implement authentication or authorization.
-- In a real-world e-commerce application, authentication (JWT/OAuth2) should be implemented on both the frontend and backend, along with proper protection for sensitive routes (checkout, user data, etc.).
+- ✅ Login is available at `POST /auth/login` using a JWT token.
+- ✅ User registration is available at `POST /users`.
+- ✅ `ProtectedRoute` protects the `/checkout` and `/contact` pages in the frontend.
+- ✅ The backend includes `JwtStrategy` and `JwtAuthGuard` for protected routes.
+- ⚠️ This is an educational/portfolio project; checkout orders are not yet persisted by the backend.
+- 🔐 The backend requires the `JWT_SECRET` environment variable, which must never be committed.
 
 ### Additional Security Measures
 
 - ✅ No sensitive information (API keys, tokens, or passwords) is stored in the source code.
-- ✅ HTTPS is recommended in production (along with a real backend replacing `json-server`).
+- ✅ HTTPS is recommended in production.
 - ✅ Error messages displayed to users are generic and do not expose internal application details.
 
 ## 📋 Supported Versions

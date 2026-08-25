@@ -2,11 +2,12 @@
 
 > 📖 [English version](README.en.md) | Versão em Português
 
-Aplicação Full-Stack de e-commerce de móveis desenvolvida com **React**, **NestJS**, **TypeScript** e **SQLite**, construída seguindo princípios de arquitetura em camadas, componentização, tipagem estática e boas práticas de desenvolvimento moderno.
+Aplicação Full-Stack de e-commerce de móveis desenvolvida com **React**, **NestJS**, **TypeScript**, **TypeORM** e **SQLite**.
 
 <div align="center">
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
+![NestJS](https://img.shields.io/badge/NestJS-11-E0234E?logo=nestjs)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.7+-3178C6?logo=typescript)
 ![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-38B2AC?logo=tailwindcss)

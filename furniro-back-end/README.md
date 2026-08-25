@@ -1,98 +1,184 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🔧 Furniro Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+> 📖 [English version](README.en.md) | Versão em Português
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+API REST do Furniro, um e-commerce de móveis desenvolvido com **NestJS**, **TypeScript**, **TypeORM** e **SQLite**.
 
-## Description
+<div align="center">
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+![NestJS](https://img.shields.io/badge/NestJS-11-E0234E?logo=nestjs)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.7+-3178C6?logo=typescript)
+![TypeORM](https://img.shields.io/badge/TypeORM-0.3-E83524)
+![SQLite](https://img.shields.io/badge/SQLite-3-003B57?logo=sqlite)
 
-## Project setup
+</div>
 
-```bash
-$ npm install
+---
+
+## 📖 Sobre o Projeto
+
+O backend fornece os recursos de catálogo, categorias, usuários e autenticação da aplicação Furniro. A API segue uma arquitetura em camadas, separando controladores, regras de negócio, repositórios, entidades e DTOs.
+
+A aplicação foi construída priorizando:
+
+- ✅ API REST com NestJS
+- ✅ Arquitetura em camadas
+- ✅ Tipagem estática com TypeScript
+- ✅ Persistência com SQLite e TypeORM
+- ✅ Validação de dados com DTOs
+- ✅ Autenticação com JWT
+- ✅ Seed para popular o banco de dados
+
+---
+
+## ✨ Funcionalidades
+
+- 🛍️ Listagem e consulta de produtos
+- 🔍 Filtros por nome, categoria, preço e desconto
+- 📄 Paginação e ordenação do catálogo
+- 🗂️ Categorias de produtos
+- 👤 Cadastro e gerenciamento de usuários
+- 🔐 Login com token JWT
+- 🌱 Seed de categorias, produtos, variantes e atributos
+
+---
+
+## 🏗️ Arquitetura
+
+```text
+Controller
+     │
+     ▼
+Service
+     │
+     ▼
+Repository
+     │
+     ▼
+TypeORM
+     │
+     ▼
+SQLite
 ```
 
-## Compile and run the project
+### Estrutura de pastas
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```text
+src/
+├── auth/             # Login, JWT e estratégias de autenticação
+├── category/         # Categorias
+├── database/         # Seed do banco de dados
+├── product/          # Produtos, filtros, DTOs e repositório
+├── user/             # Usuários e cadastro
+├── app.module.ts
+└── main.ts
 ```
 
-## Run tests
+---
+
+## 🚀 Configuração
+
+### Pré-requisitos
+
+- **Node.js** (versão 18+)
+- **npm**
+- **JWT_SECRET** definido como variável de ambiente
+
+### Instalação
+
+Dentro da pasta `furniro-back-end/`:
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm install
 ```
 
-## Deployment
+Configure o segredo usado na autenticação:
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+```env
+JWT_SECRET=seu-segredo-local
+```
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+---
+
+## ▶️ Execução
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm run seed
+npm run start:dev
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+A API estará disponível em `http://localhost:3000`.
 
-## Resources
+Para executar frontend e backend juntos, use na raiz do projeto:
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+docker compose up --build
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+O Docker Compose executa a seed automaticamente e disponibiliza o frontend em `http://localhost:5173`.
 
-## Support
+---
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## 🌐 API REST
 
-## Stay in touch
+### Endpoints
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+| Método   | Endpoint             | Descrição                             |
+| -------- | -------------------- | ------------------------------------- |
+| `GET`    | `/`                  | Verifica se a API está funcionando    |
+| `GET`    | `/products`          | Lista produtos                        |
+| `GET`    | `/products/:id/slug` | Consulta os detalhes de um produto    |
+| `GET`    | `/users`             | Lista usuários                        |
+| `GET`    | `/users/:id`         | Consulta um usuário por ID            |
+| `GET`    | `/users/:email`      | Consulta um usuário por e-mail        |
+| `POST`   | `/users`             | Cadastra um usuário                   |
+| `PUT`    | `/users/:id`         | Atualiza um usuário                   |
+| `DELETE` | `/users/:id`         | Remove um usuário                     |
+| `POST`   | `/auth/login`        | Autentica um usuário e retorna um JWT |
 
-## License
+### Filtros de produtos
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+O endpoint `GET /products` aceita os parâmetros `name`, `category`, `minPrice`, `maxPrice`, `hasDiscount`, `page`, `limit`, `sortBy` e `order`.
+
+Os valores aceitos para `sortBy` são `price`, `name` e `postedAt`. Para `order`, são `asc` e `desc`.
+
+Exemplo:
+
+```http
+GET /products?category=Dining&minPrice=500&maxPrice=1000&page=1&limit=8
+```
+
+A resposta paginada possui o formato:
+
+```json
+{
+  "data": [],
+  "total": 0,
+  "page": 1,
+  "limit": 8
+}
+```
+
+---
+
+## 🧪 Scripts Disponíveis
+
+| Script               | Descrição                                |
+| -------------------- | ---------------------------------------- |
+| `npm run start`      | Inicia a aplicação                       |
+| `npm run start:dev`  | Inicia em modo desenvolvimento com watch |
+| `npm run start:prod` | Executa a versão compilada               |
+| `npm run build`      | Compila o projeto                        |
+| `npm run seed`       | Popula o banco de dados                  |
+| `npm run lint`       | Executa o ESLint                         |
+| `npm run test`       | Executa os testes unitários              |
+| `npm run test:e2e`   | Executa os testes End-to-End             |
+| `npm run test:cov`   | Gera o relatório de cobertura            |
+
+---
+
+## 📊 Banco de Dados
+
+O projeto utiliza SQLite como banco de dados. A seed cadastra categorias, produtos, variantes, atributos e suas relações.
+
+O arquivo `JWT_SECRET` deve ser mantido somente no ambiente de execução e nunca versionado.

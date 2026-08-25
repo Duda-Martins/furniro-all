@@ -1,48 +1,51 @@
 # 🗺️ Roadmap de Implementação — Furniro
 
 - [🗺️ Roadmap de Implementação — Furniro](#️-roadmap-de-implementação--furniro)
-    - [📦 Estado Atual do Projeto](#-estado-atual-do-projeto)
-        - [Roteamento — `src/App.tsx`](#roteamento--srcapptsx)
-        - [Carrinho — `src/store/cartStore.ts`](#carrinho--srcstorecartstorets)
-        - [Página Cart — `src/pages/Cart.tsx`](#página-cart--srcpagescarttsx)
-        - [Componentes reutilizáveis relevantes](#componentes-reutilizáveis-relevantes)
-        - [Header e Nav](#header-e-nav)
-        - [Cliente HTTP — `src/api/api.ts`](#cliente-http--srcapiapits)
-        - [Backend — O que existe](#backend--o-que-existe)
-        - [Estilização](#estilização)
-    - [Sequência de Implementação](#sequência-de-implementação)
-    - [Fase 1 — Backend: Autenticação](#fase-1--backend-autenticação)
-        - [1.1 Módulo `user`](#11-módulo-user)
-        - [1.2 Módulo `auth`](#12-módulo-auth)
-    - [Fase 2 — Frontend: Infraestrutura de Auth](#fase-2--frontend-infraestrutura-de-auth)
-        - [2.1 `src/store/authStore.ts` (Zustand)](#21-srcstoreauthstorets-zustand)
-        - [2.2 Atualizar `src/api/api.ts`](#22-atualizar-srcapiapits)
-        - [2.3 Componente `ProtectedRoute`](#23-componente-protectedroute)
-        - [2.4 Instalar dependências de formulário](#24-instalar-dependências-de-formulário)
-    - [Fase 3 — Login / Cadastro](#fase-3--login--cadastro)
-        - [3.1 Página `src/pages/Login.tsx`](#31-página-srcpageslogintsx)
-        - [3.2 Página `src/pages/Register.tsx`](#32-página-srcpagesregistertsx)
-        - [3.3 Logout e ícone de usuário](#33-logout-e-ícone-de-usuário)
-        - [3.4 Atualizar `src/App.tsx`](#34-atualizar-srcapptsx)
-    - [Fase 4 — Cart Sidebar](#fase-4--cart-sidebar)
-        - [4.1 Componente `src/components/CartSidebar.tsx`](#41-componente-srccomponentscartsidebartsx)
-        - [4.2 Estado de abertura do Sidebar](#42-estado-de-abertura-do-sidebar)
-        - [4.3 Atualizar `src/components/UserAndCartIcon.tsx`](#43-atualizar-srccomponentsuserandcarticontsx)
-        - [4.4 Atualizar `src/components/Layout.tsx`](#44-atualizar-srccomponentslayouttsx)
-    - [Fase 5 — Checkout](#fase-5--checkout)
-        - [5.1 Página `src/pages/Checkout.tsx`](#51-página-srcpagescheckouttsx)
-        - [5.2 Atualizar `src/pages/Cart.tsx`](#52-atualizar-srcpagescarttsx)
-    - [Fase 6 — Contact](#fase-6--contact)
-        - [6.1 Página `src/pages/Contact.tsx`](#61-página-srcpagescontacttsx)
-        - [6.2 Rota já preparada na Fase 3](#62-rota-já-preparada-na-fase-3)
-    - [Fase 7 — Ajustes Finais](#fase-7--ajustes-finais)
-        - [7.1 Branches por funcionalidade](#71-branches-por-funcionalidade)
-        - [7.2 Limpeza e consistência](#72-limpeza-e-consistência)
-    - [Novas instalações necessárias](#novas-instalações-necessárias)
-        - [Frontend (`furniro-web/`)](#frontend-furniro-web)
-        - [Backend (`furniro-back-end/`)](#backend-furniro-back-end)
+  - [📦 Estado Atual do Projeto](#-estado-atual-do-projeto)
+    - [Roteamento — `src/App.tsx`](#roteamento--srcapptsx)
+    - [Carrinho — `src/store/cartStore.ts`](#carrinho--srcstorecartstorets)
+    - [Página Cart — `src/pages/Cart.tsx`](#página-cart--srcpagescarttsx)
+    - [Componentes reutilizáveis relevantes](#componentes-reutilizáveis-relevantes)
+    - [Header e Nav](#header-e-nav)
+    - [Cliente HTTP — `src/api/api.ts`](#cliente-http--srcapiapits)
+    - [Backend — O que existe](#backend--o-que-existe)
+    - [Pendências atuais](#pendências-atuais)
+    - [Estilização](#estilização)
+  - [Sequência de Implementação](#sequência-de-implementação)
+  - [Fase 1 — Backend: Autenticação](#fase-1--backend-autenticação)
+    - [1.1 Módulo `user`](#11-módulo-user)
+    - [1.2 Módulo `auth`](#12-módulo-auth)
+  - [Fase 2 — Frontend: Infraestrutura de Auth](#fase-2--frontend-infraestrutura-de-auth)
+    - [2.1 `src/store/authStore.ts` (Zustand)](#21-srcstoreauthstorets-zustand)
+    - [2.2 Atualizar `src/api/api.ts`](#22-atualizar-srcapiapits)
+    - [2.3 Componente `ProtectedRoute`](#23-componente-protectedroute)
+    - [2.4 Instalar dependências de formulário](#24-instalar-dependências-de-formulário)
+  - [Fase 3 — Login / Cadastro](#fase-3--login--cadastro)
+    - [3.1 Página `src/pages/Login.tsx`](#31-página-srcpageslogintsx)
+    - [3.2 Página `src/pages/Register.tsx`](#32-página-srcpagesregistertsx)
+    - [3.3 Logout e ícone de usuário](#33-logout-e-ícone-de-usuário)
+    - [3.4 Atualizar `src/App.tsx`](#34-atualizar-srcapptsx)
+  - [Fase 4 — Cart Sidebar](#fase-4--cart-sidebar)
+    - [4.1 Componente `src/components/CartSidebar.tsx`](#41-componente-srccomponentscartsidebartsx)
+    - [4.2 Estado de abertura do Sidebar](#42-estado-de-abertura-do-sidebar)
+    - [4.3 Atualizar `src/components/UserAndCartIcon.tsx`](#43-atualizar-srccomponentsuserandcarticontsx)
+    - [4.4 Atualizar `src/components/Layout.tsx`](#44-atualizar-srccomponentslayouttsx)
+  - [Fase 5 — Checkout](#fase-5--checkout)
+    - [5.1 Página `src/pages/Checkout.tsx`](#51-página-srcpagescheckouttsx)
+    - [5.2 Atualizar `src/pages/Cart.tsx`](#52-atualizar-srcpagescarttsx)
+  - [Fase 6 — Contact](#fase-6--contact)
+    - [6.1 Página `src/pages/Contact.tsx`](#61-página-srcpagescontacttsx)
+    - [6.2 Rota já preparada na Fase 3](#62-rota-já-preparada-na-fase-3)
+  - [Fase 7 — Ajustes Finais](#fase-7--ajustes-finais)
+    - [7.1 Branches por funcionalidade](#71-branches-por-funcionalidade)
+    - [7.2 Limpeza e consistência](#72-limpeza-e-consistência)
+  - [Novas instalações necessárias](#novas-instalações-necessárias)
+    - [Frontend (`furniro-web/`)](#frontend-furniro-web)
+    - [Backend (`furniro-back-end/`)](#backend-furniro-back-end)
 
 ---
+
+> **Status do documento:** as fases abaixo registram o plano original de implementação. A autenticação, o cadastro, as páginas protegidas, o checkout, o contato e o `CartSidebar` já foram implementados. As pendências atuais estão consolidadas ao final deste documento.
 
 ## 📦 Estado Atual do Projeto
 
@@ -59,8 +62,11 @@ Rotas existentes:
 | `/cart`           | `Cart`     | pública  |
 | `*`               | `NotFound` | —        |
 
-- `/contact` e `/about` já existem no `Nav` mas não têm página — caem no `NotFound`.
-- Não há nenhum sistema de autenticação ainda.
+Também estão implementadas as rotas públicas `/login` e `/register`, além das rotas protegidas `/checkout` e `/contact`.
+
+- `/about` permanece sem uma página própria e cai no `NotFound`.
+- `/contact` possui página protegida e exige autenticação.
+- O sistema de autenticação utiliza JWT no backend e cookie no `authStore` do frontend.
 
 ---
 
@@ -89,7 +95,7 @@ Ações disponíveis no store: `addItem`, `removeItem`, `updateQuantity`, `clear
 
 - Tabela completa de itens com imagem, nome, variante, preço, quantidade (`Increaser`) e remoção.
 - Usa `CartTotals` para exibir subtotal/total e o botão de checkout.
-- **O botão "Check Out" atualmente só dispara um `toast.success` — não navega para nenhuma página.** Isso será corrigido na Fase 5.
+- O botão "Check Out" navega para `/checkout`.
 
 ---
 
@@ -129,11 +135,18 @@ Wrapper de `fetch` com `Content-Type: application/json` e tratamento de erro. L�
 
 ### Backend — O que existe
 
-Módulos ativos: `product` e `category`.
+Módulos ativos: `product`, `category`, `user` e `auth`.
 
 Arquitetura em camadas: `Controller → Service → Repository → TypeORM → SQLite`.
 
-**Não existe nenhum módulo de autenticação, usuário ou pedido.** Tudo isso será criado na Fase 1.
+O backend possui autenticação e usuários. Ainda não existe persistência de pedidos.
+
+### Pendências atuais
+
+- Adaptar o `ProductService` do frontend ao contrato NestJS (`minPrice`, `maxPrice`, `hasDiscount`, `sortBy`, `page` e `limit`).
+- Consolidar ou remover a duplicidade entre `src/api/api.ts` e `src/services/api.ts`.
+- Enviar o token JWT nas chamadas que exigirem autenticação.
+- Implementar persistência de pedidos no backend, caso faça parte do escopo do projeto.
 
 ---
 
