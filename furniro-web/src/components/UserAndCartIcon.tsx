@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { getCartCount, useCartStore } from "../store/cartStore";
+import { CartSidebar } from "../components/CartSidebar";
 
 type UserAndCartIconProps = {
     className?: string;
@@ -31,8 +32,7 @@ export function UserAndCartIcon({ className }: UserAndCartIconProps) {
                     />
                 </svg>
             </Link>
-            <Link
-                to="/cart"
+            <CartSidebar
                 aria-label={
                     count > 0
                         ? `Cart, ${count} ${count === 1 ? "item" : "items"}`
@@ -59,7 +59,7 @@ export function UserAndCartIcon({ className }: UserAndCartIconProps) {
                         fill="black"
                     />
                 </svg>
-            </Link>
+            </CartSidebar>
         </div>
     );
 }
