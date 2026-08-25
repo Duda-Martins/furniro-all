@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
 import { BannerContainer } from "../components/BannerContainer";
 import { CartTotals } from "../components/CartTotals";
 import { Container } from "../components/Container";
@@ -19,6 +18,7 @@ function itemKey(item: CartItem) {
 }
 
 export function Cart() {
+    const navigate = useNavigate();
     const items = useCartStore((state) => state.items);
     const removeItem = useCartStore((state) => state.removeItem);
     const updateQuantity = useCartStore((state) => state.updateQuantity);
@@ -26,7 +26,7 @@ export function Cart() {
     const total = getCartTotal(items);
 
     function handleCheckout() {
-        toast.success("Check out completed successfully!");
+        navigate("/checkout");
     }
 
     return (
@@ -87,19 +87,24 @@ export function Cart() {
                                                             className="inline-block h-3 w-3 rounded-full border border-black/10"
                                                             style={{
                                                                 backgroundColor:
-                                                                    item.variant.color,
+                                                                    item.variant
+                                                                        .color,
                                                             }}
                                                         />
                                                         {item.variant.size}
                                                     </span>
                                                 )}
                                                 <span className="font-poppins text-base text-[#9F9F9F] md:hidden">
-                                                    {formatPrice(getUnitPrice(item))}
+                                                    {formatPrice(
+                                                        getUnitPrice(item),
+                                                    )}
                                                 </span>
                                             </div>
 
                                             <span className="hidden font-poppins text-base text-[#9F9F9F] md:block">
-                                                {formatPrice(getUnitPrice(item))}
+                                                {formatPrice(
+                                                    getUnitPrice(item),
+                                                )}
                                             </span>
 
                                             <div className="col-start-2 md:col-start-auto">
@@ -124,7 +129,10 @@ export function Cart() {
                                                 type="button"
                                                 aria-label={`Remove ${item.product.name} from cart`}
                                                 onClick={() =>
-                                                    removeItem(item.product.id, variantId)
+                                                    removeItem(
+                                                        item.product.id,
+                                                        variantId,
+                                                    )
                                                 }
                                                 className="col-start-2 w-fit cursor-pointer transition-opacity hover:opacity-70 md:col-start-auto md:justify-self-center"
                                             >
