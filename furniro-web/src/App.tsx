@@ -14,6 +14,7 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Checkout } from "./pages/Checkout";
+import { Contact } from "./pages/Contact";
 
 function App() {
     return (
@@ -53,14 +54,14 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
-                    {/* <Route
+                    <Route
                         path="contact"
                         element={
                             <ProtectedRoute>
                                 <Contact />
                             </ProtectedRoute>
                         }
-                    /> */}
+                    />
                     <Route path="*" element={<NotFound />} />
                 </Route>
             </Routes>
