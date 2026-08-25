@@ -128,3 +128,19 @@
 .Toastify__toast-icon svg {
     fill: #2ec1ac !important;
 }
+
+.input {
+    @apply w-full mb-5 rounded-[10px] border border-[#9F9F9F] bg-white px-3 py-6 text-base outline-none transition;
+}
+
+.input:focus {
+    @apply border-gray-500 ring-1 ring-gray-500;
+}
+
+.input:disabled {
+    @apply cursor-not-allowed bg-gray-100;
+}
+
+.checkout-submit {
+    @apply rounded-[15px] border border-black bg-white px-22 py-4 font-poppins text-xl text-black transition-colors duration-200 hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-50;
+}
