@@ -18,7 +18,7 @@ Caso você identifique alguma vulnerabilidade ou falha de segurança, siga estas
 
 ## 🔐 Boas práticas de segurança implementadas
 
-Este projeto segue as melhores práticas de segurança recomendadas para aplicações frontend em React:
+Este projeto segue práticas de segurança para o frontend React e o backend NestJS:
 
 ### Validações e Sanitização
 
@@ -38,13 +38,17 @@ Este projeto segue as melhores práticas de segurança recomendadas para aplica�
 
 ### Autenticação e Autorização
 
-- ⚠️ **Nota:** Este é um projeto educacional/de portfólio e não implementa autenticação ou autorização
-- Em uma aplicação de e-commerce real, recomenda-se a implementação de autenticação (JWT/OAuth2) tanto no frontend quanto em um backend real, além de proteção de rotas sensíveis (checkout, dados do usuário, etc.)
+- ✅ Login em `POST /auth/login` com token JWT
+- ✅ Cadastro em `POST /users`
+- ✅ `ProtectedRoute` protege as páginas `/checkout` e `/contact` no frontend
+- ✅ O backend possui `JwtStrategy` e `JwtAuthGuard` para rotas protegidas
+- ⚠️ O projeto é educacional/de portfólio; o checkout ainda não persiste pedidos no backend
+- 🔐 O backend exige a variável `JWT_SECRET`, que deve ser fornecida por ambiente e nunca versionada
 
 ### Outras Medidas
 
 - ✅ Nenhuma informação sensível (chaves, tokens, senhas) é armazenada no código-fonte
-- ✅ HTTPS recomendado em produção (junto de um backend real, substituindo o `json-server`)
+- ✅ HTTPS recomendado em produção
 - ✅ Mensagens de erro exibidas ao usuário são genéricas, sem expor detalhes internos da aplicação
 
 ## 📋 Versões suportadas
