@@ -15,7 +15,7 @@ export function Checkout() {
                 ]}
             />
             <Container>
-                <div className="py-40">
+                <div className="py-20">
                     <CheckoutForm />
                 </div>
             </Container>

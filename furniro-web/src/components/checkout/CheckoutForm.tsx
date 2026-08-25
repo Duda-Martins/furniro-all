@@ -52,15 +52,14 @@ export function CheckoutForm() {
 
     return (
         <FormProvider {...methods}>
+            <h2 className="mb-6 font-poppins text-4xl font-semibold">
+                Billing details
+            </h2>
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="grid grid-cols-1 gap-32 lg:grid-cols-2"
             >
                 <section>
-                    <h2 className="mb-6 font-poppins text-4xl font-semibold">
-                        Billing details
-                    </h2>
-
                     <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                         <CheckoutField
                             label="First Name"
