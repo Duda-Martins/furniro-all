@@ -1,4 +1,4 @@
-# Contributing to Furniro Web
+# Contributing to Furniro
 
 Portuguese version: [CONTRIBUTING.md](CONTRIBUTING.md)
 
@@ -49,38 +49,49 @@ cd furniro-web2
 2. **Install the dependencies:**
 
 ```bash
+cd furniro-back-end
 npm install
+npm run seed
+npm run start:dev
 ```
 
-3. **Start the mock API (json-server):**
+3. **In another terminal, install and start the frontend:**
 
 ```bash
-npm run server
-```
-
-4. **In another terminal, start the frontend in development mode:**
-
-```bash
+cd ../furniro-web
+npm install
 npm run dev
+```
+
+4. **Or start both services with Docker Compose:**
+
+```bash
+docker compose up --build
 ```
 
 ---
 
 ## 🧪 Before Submitting
 
-- **Make sure the project builds successfully:**
+- **Build the backend and frontend separately:**
 
 ```bash
+cd furniro-back-end
+npm run build
+cd ../furniro-web
 npm run build
 ```
 
 - **Run the linter and fix any reported issues:**
 
 ```bash
+cd furniro-back-end
+npm run lint
+cd ../furniro-web
 npm run lint
 ```
 
-- **Manually test the application** with `json-server` running and verify the features described in the `README.md`.
+- **Manually test the application** with the backend and frontend running. `json-server` remains available as a frontend mock mode.
 
 - **Follow the project's coding standards:**
     - Use TypeScript in all files.
@@ -98,9 +109,9 @@ npm run lint
 
 ## 💡 Suggestions for Contributions
 
-- **New features:** product filters, cart persistence, additional pages (e.g., product details)
+- **New features:** full catalog integration with the NestJS API, order persistence, and accessibility improvements
 - **UI/UX improvements:** responsive design, accessibility, and animations
-- **New tests:** the project does not yet include automated tests—contributions using Vitest and Testing Library are highly appreciated
+- **New tests:** the backend includes unit and e2e tests; frontend tests using Vitest and Testing Library are highly appreciated
 - **Documentation:** improvements to the README or code comments
 - **If you find a bug:** open an Issue including:
     - A detailed description

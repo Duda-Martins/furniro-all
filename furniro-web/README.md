@@ -2,7 +2,7 @@
 
 > 📖 [English version](README.en.md) | Versão em Português
 
-Uma landing page de e-commerce de móveis construída com React, TypeScript e Tailwind CSS, consumindo uma API REST mockada com json-server.
+Uma interface de e-commerce de móveis construída com React, TypeScript e Tailwind CSS. O frontend possui integração de autenticação com a API NestJS e mantém o `json-server` como modo mock para o catálogo.
 
 <div align="center">
 
@@ -10,7 +10,7 @@ Uma landing page de e-commerce de móveis construída com React, TypeScript e Ta
 [![TypeScript](https://img.shields.io/badge/TypeScript-6.0-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-8-purple?logo=vite)](https://vite.dev/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-38B2AC?logo=tailwindcss)](https://tailwindcss.com/)
-[![json-server](https://img.shields.io/badge/json--server-0.17-orange)](https://github.com/typicode/json-server)
+[![NestJS](https://img.shields.io/badge/NestJS-11-red?logo=nestjs)](https://nestjs.com/)
 
 </div>
 
@@ -45,6 +45,9 @@ O projeto foi construído seguindo:
 - ♾️ **Galeria Infinita** (`#FuniroFurniture`) com scroll horizontal animado via CSS puro
 - 📧 **Formulário de Newsletter** com validação de e-mail em tempo real e feedback via toast
 - 📱 **Menu responsivo** com hambúrguer para dispositivos móveis
+- 🔐 **Autenticação** com login, cadastro e proteção das páginas de checkout e contato
+- 🛒 **Carrinho persistente** com Zustand e armazenamento local
+- 💳 **Checkout** com validação e consulta de CEP
 - 🔗 **Footer completo** com redes sociais, links institucionais e newsletter
 
 ---
@@ -118,10 +121,9 @@ src/
 │   └── slides.ts
 ├── types/
 │   └── splide.d.ts                # Tipagem manual do @splidejs/react-splide
-└── assets/
+└── public/
     ├── img/                        # Imagens de produtos, grid e carrossel
-    ├── favicon.svg
-    └── icons.svg
+    └── icons/                      # Ícones públicos
 
 db/
 └── db.json                        # Base de dados mockada consumida pelo json-server
@@ -130,11 +132,11 @@ db/
 ### Fluxo de Dados
 
 ```
-ProductsSection → ProductService.getProducts() → json-server (db/db.json)
-       → ProductResponseModel { products, hasMore } → ProductCard (renderização)
+ProductsSection → ProductService.getProducts() → API configurada em `VITE_API_URL`
+    → ProductResponseModel → ProductCard (renderização)
 ```
 
-O `ProductService` monta a query string a partir de um `ProductFilter` (nome, categoria, faixa de preço, desconto, paginação e ordenação) e usa o header `X-Total-Count`, retornado pelo json-server, para calcular se ainda há mais páginas (`hasMore`).
+O `ProductService` mantém o contrato legado do `json-server`, utilizando `_page`, `_limit`, `_sort`, `_order` e o header `X-Total-Count`. A adaptação completa para os parâmetros da API NestJS permanece como pendência de integração.
 
 ---
 
@@ -236,7 +238,7 @@ npm run lint          # Executa o ESLint
 ## 📈 Possíveis Melhorias Futuras
 
 - 🔍 Implementar filtros de produto por categoria, preço e desconto (o `ProductFilterModel` já dá suporte a isso)
-- 🛒 Persistir o carrinho de compras (atualmente o "Add to Cart" apenas exibe um toast)
+- 🔌 Consolidar o `ProductService` com o contrato da API NestJS
 - 🧪 Adicionar testes automatizados (unitários e de integração)
 - 🌐 Migrar de `json-server` para uma API real em produção
 
@@ -244,17 +246,6 @@ npm run lint          # Executa o ESLint
 
 ## 📝 Licença
 
-Este projeto é Protegido pela licensa MIT.
-
----
-
-## 👤 Autor
-
-**Maria Eduarda Martins Rodrigues**
-
-- 🔗 [GitHub](https://github.com/Duda-Martins)
-- 📧 Contato: mrodrigues.mariaeduarda@gmail.com
-
----
+Este projeto é protegido pela licença MIT.
 
 **Made with ❤️**
