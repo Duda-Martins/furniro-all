@@ -10,7 +10,7 @@ export const contactSchema = z.object({
 
     subject: z.string().optional(),
 
-    message: z.string().min(1, "Message is required."),
+    message: z.string().optional(),
 });
 
 export type ContactFormData = z.infer<typeof contactSchema>;
